@@ -19,16 +19,17 @@ int solve(int i,int prev,vector<int>&nums,vector<vector<int>>&dp)
 public:
     int lengthOfLIS(vector<int>& nums) {
         int n=nums.size();
-        int ans=0;
-        vector<int>dp(n,1);
-        for(int i=0;i<n;i++)
-        {
-            for(int prev=0;prev<i;prev++)
+        int ans=1;
+        vector<int>temp;
+        temp.push_back(nums[0]);
+        for(int i=1;i<n;i++){
+            if(temp.back()<nums[i])
+            {temp.push_back(nums[i]);ans++;}
+            else
             {
-                if(nums[i]>nums[prev])
-                dp[i]=max(1+dp[prev],dp[i]);
+                int ind=lower_bound(begin(temp),end(temp),nums[i])-temp.begin();
+                temp[ind]=nums[i];
             }
-            ans=max(ans,dp[i]);
         }
         return ans;
     }
