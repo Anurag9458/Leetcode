@@ -13,11 +13,9 @@ class Solution {
 public:
     int maxLevelSum(TreeNode* root) {
         if(!root->left && !root->right)return 1;
-        int maxi=INT_MIN,ans=0,level=1;
+        int maxi=INT_MIN,ans=0,l=1;
         queue<TreeNode*>q;
         q.push(root);
-
-        //bfs traversal
         while(!q.empty())
         {
             int temp=0;
@@ -26,8 +24,6 @@ public:
             {
                 TreeNode* node=q.front();
                 q.pop();
-
-                //calculating the sum at current level
                 temp+=node->val;
                 if(node->left)q.push(node->left);
                 if(node->right)q.push(node->right);
@@ -35,9 +31,9 @@ public:
             if(temp>maxi)
             {
                 maxi=temp;
-                ans=level;
+                ans=l;
             }
-            level++;
+            l++;
         }
         return ans;
     }
