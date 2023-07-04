@@ -27,7 +27,23 @@ public:
             return ans;
         }
         map<int, map<int, multiset<int>>>mp;
-        inorder(root,mp,0,0);
+        // inorder(root,mp,0,0);
+        queue<pair<TreeNode*, pair<int,int>>>q;
+        q.push({root, {0,0}});
+        while(!q.empty()){
+            auto temp = q.front();
+            q.pop();
+            TreeNode *node = temp.first;
+            int v = temp.second.first, l = temp.second.second;
+            
+            mp[v][l].insert(node->val);
+            if(node->left){
+                q.push({node->left, {v-1, l+1}});
+            }
+            if(node->right){
+                q.push({node->right, {v+1 , l+1}});
+            }
+        }
 
         for(auto it:mp){
             vector<int> temp;
