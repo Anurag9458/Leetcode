@@ -1,41 +1,23 @@
 class Solution {
-
-    int solve(vector<int>& nums,int x){
-        int maxi = 0;
-        int count = 0;
-        for(int i = 0; i < n; i++){
-            if(i == x){
-                continue;
-            }
-            if(nums[i] == 1){
-                count++;
-                maxi = max(maxi, count);
-            }
-            else{
-                count = 0;
-            }
-        }
-        return maxi;
-    }
-
 public:
-    int n;
     int longestSubarray(vector<int>& nums) {
-        n = nums.size();
-        int count = 0;
-        int ans = 0;
-        for(int i = 0; i < n; i++){
-            
-            if(nums[i] == 0){
+        int n = nums.size();
+
+        int i = 0,count = 0,maxi = 0;
+
+        for(int j = 0; j < n; j++){
+            if(nums[j] == 0){
                 count++;
-                ans  = max(ans, solve(nums,i));
             }
-            
+            while(count > 1){
+                if(nums[i] == 0){
+                    count--;
+                }
+                i++;
+            }
+            maxi = max(maxi, j-i);
         }
         
-        if(count == 0){
-            return n - 1;
-        }
-        return ans;
+        return maxi;
     }
 };
