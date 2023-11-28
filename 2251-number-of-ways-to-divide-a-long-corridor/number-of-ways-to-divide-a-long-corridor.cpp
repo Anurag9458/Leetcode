@@ -30,7 +30,25 @@ class Solution {
 public:
     int numberOfWays(string s) {
         int n=s.size();
-        vector<vector<int>>dp(n,vector<int>(3,-1));
-        return solve(0,0,s,dp,n);
+        // vector<vector<int>>dp(n+1,vector<int>(3,0));
+        vector<int>prev(3,0),curr(3,0);
+        prev[2]=1;
+        for(int i=n-1;i>=0;i--){
+            
+            if(s[i]=='S'){
+            curr[0]=prev[1];
+            curr[1]=prev[2];
+            curr[2]=prev[1];
+                }
+                else{
+                    curr[0] = prev[0];
+                    curr[1] = prev[1];
+                    curr[2] = (prev[2]+prev[0])%mod;
+                }   
+                prev=curr;
+            }
+            
+        
+        return curr[0];
     }
 };
