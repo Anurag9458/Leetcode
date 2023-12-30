@@ -14,11 +14,6 @@ public:
             }
         }
 
-        // auto it=mp.begin();
-        // int temp=it->second;
-        // if(temp==1 && n>1){
-        //     return 0;
-        // }
         for(auto it:mp){
             if(it.second%n){
                 return 0;
