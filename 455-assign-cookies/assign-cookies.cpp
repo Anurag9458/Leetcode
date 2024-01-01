@@ -5,13 +5,10 @@ public:
         sort(begin(s),end(s));
         int count=0;
         for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(s[j]>=g[i]){
-                    s[j]=0;
-                    count++;
-                    break;
-                }
-            }
+            int it=lower_bound(begin(s),end(s),g[i])-begin(s);
+            if(it!=s.size()){
+            count++;
+            s.erase(begin(s)+it);}
         }
         return count;
     }
