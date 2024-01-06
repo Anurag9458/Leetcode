@@ -5,9 +5,9 @@ class Solution {
             return 1;
         }
 
-        if(mp.count(s.substr(i,n-i))){
-            return 1;
-        }
+        // if(mp.count(s.substr(i,n-i))){
+        //     return 1;
+        // }
        
         if(dp[i]!=-1){
             return dp[i];
