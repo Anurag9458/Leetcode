@@ -4,10 +4,13 @@ public:
         map<int,int>mp;
         int sum=0,ans=0;
         int n=nums.size();
+        mp[0]=1;
         for(int i=0;i<n;i++){
-            mp[sum]++;
+            
             sum+=nums[i];
-            if(mp.count(sum-k))ans+=mp[sum-k];
+            ans+=mp[sum-k];
+            mp[sum]++;
+            
         }
         return ans;
     }
