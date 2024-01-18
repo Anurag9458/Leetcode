@@ -1,86 +1,39 @@
-struct Node{
-    Node *links[26];
-    bool flag=0;
-
-    void put(char ch,Node *node){
-        links[ch-'a']=node;
-    }
-
-    Node *get(char ch){
-        return links[ch-'a'];
-    }
-
-    bool containskey(char ch){
-        return links[ch-'a']!=NULL;
-    }
-
-    void setend(){
-        flag=1;
-    }
-
-    bool isend(){
-        return flag;
-    }
-
-};
-
-class Trie{
-     public:
-    Node *root;
-   
-    Trie(){
-        root=new Node();
-    }
-
-    void insert(string s){
-        Node *node=root;
-        for(char c:s){
-            if(!node->containskey(c)){
-                node->put(c,new Node());
-            }
-            node=node->get(c);
-        }
-        node->setend();
-    }
-    
-    bool search(string s){
-        Node *node=root;
-        for(char c:s){
-            if(node->containskey(c)){
-                node=node->get(c);
-            }else{
-                return 0;
-            }
-        }
-        return node->isend();
-    }
-
-};
-
-
-
 class Solution {
+    map<string,int>mp;
+    int dp[52];
 public:
-    int minExtraChar(string s, vector<string>& dictionary) {
-        Trie trie;
 
-        for(string s:dictionary){
-            trie.insert(s);
+    int solve(int i,int &n,string &s){
+        if(i>=n){
+            return 0;
         }
 
-        int n=s.size();
-        vector<int>dp(n+1,0);
-        for(int i=n-1;i>=0;i--){
-            dp[i]=dp[i+1]+1;
-            Node *node=trie.root;
-            for(int j=i;j<n;j++){
-                if(node->links[s[j]-'a']==NULL) break;
-                node=node->links[s[j]-'a'];
-                if(node->isend())
-                dp[i]=min(dp[i],dp[j+1]);
+        if(dp[i]!=-1){
+            return dp[i];
+        }
+        int ans=n,curr;
+        string temp;
+        for(int j=i;j<n;j++){
+            temp.push_back(s[j]);
+            if(!mp.count(temp)){
+                curr=temp.length();
+            }else{
+                curr=0;
             }
+            int remain=solve(j+1,n,s);
+            ans=min(remain+curr,ans);
         }
+        return dp[i]=ans;
+    }
 
-    return dp[0];
+    int minExtraChar(string s, vector<string>& dictionary) {
+        
+    for(string s:dictionary){
+        mp[s]++;
+    }
+    memset(dp,-1,sizeof(dp));
+    int n=s.size();
+    int a=solve(0,n,s);
+    return a;
     }
 };
