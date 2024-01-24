@@ -12,10 +12,6 @@
 class Solution {
 
     bool check(unordered_map<int,int>&mp){
-        // map<int,int>mp;
-        // for(int i:arr){
-        //     mp[i]++;
-        // }
         int  count=0;
         for(auto it:mp){
             if(it.second%2){
@@ -50,7 +46,6 @@ class Solution {
 
 public:
     int pseudoPalindromicPaths (TreeNode* root) {
-        // vector<int>temp;
         unordered_map<int,int>temp;
         if(!root->left && !root->right){
             return 1;
