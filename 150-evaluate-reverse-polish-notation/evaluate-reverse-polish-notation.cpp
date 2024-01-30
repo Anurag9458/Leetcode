@@ -8,11 +8,8 @@ public:
                 st.push(arr[i]);
             }else{
                 string sign=arr[i];
-                string a="1",b="1";
-                // if(!st.empty())
-                a=st.top();st.pop();
-                // if(!st.empty())
-                b=st.top();st.pop();
+                string a=st.top();st.pop();
+                string b=st.top();st.pop();
                 int temp1=stoi(a),temp2=stoi(b);
                 if(arr[i]=="+"){
                     temp2+=temp1;
