@@ -19,20 +19,23 @@ class Solution {
     }
 
 
-    int solve(int i,int n,string &s){
+    int solve(int i,int n,string &s,vector<int>&dp){
         if(i==n){
             return 0;
         }
         int ans=1e9;
+        if(dp[i]!=-1){
+            return dp[i];
+        }
         string temp;
         for(int j=i;j<n;j++){
             temp.push_back(s[j]);
             if(check(temp)){
-                ans=min(ans,1+solve(j+1,n,s));
+                ans=min(ans,1+solve(j+1,n,s,dp));
             }
         }
         
-        return ans;
+        return dp[i]=ans;
     }
 
 public:
@@ -46,7 +49,9 @@ public:
         }
         int n=s.size();
 
-        int ans=solve(0,n,s);
+        vector<int>dp(n,-1);
+
+        int ans=solve(0,n,s,dp);
         return ans==1e9?-1:ans;
     }
 };
