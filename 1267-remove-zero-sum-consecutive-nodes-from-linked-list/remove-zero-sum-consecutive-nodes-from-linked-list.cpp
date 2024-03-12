@@ -16,12 +16,11 @@ class Solution {
 
     while(curr && temp!=sum){
         temp+=curr->val;
-        cout<<temp<<" ";
+        
         prev=curr;
         curr=curr->next;
     }
-    cout<<endl;
-    // cout<<prev->val<<" ";
+   
     
     temp=0;
 
@@ -32,8 +31,7 @@ class Solution {
             break;
         }
     }
-    // if(curr)
-    // cout<<curr->val<<" ";
+    
     if(temp==0)
     prev->next=curr;
     return;
@@ -48,7 +46,7 @@ public:
     ListNode *curr=head;
     while(curr){
         sum+=curr->val;
-        // cout<<sum<<" ";
+       
         if(sum==0){
             head=curr->next;
             mp.clear();
