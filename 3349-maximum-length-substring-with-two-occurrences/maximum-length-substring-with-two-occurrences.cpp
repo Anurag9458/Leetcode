@@ -3,18 +3,19 @@ public:
     int maximumLengthSubstring(string s) {
         int n=s.size();
         int ans=0;
+        int i=0,j=0;
+        map<char,int>mp;
 
-
-        for(int i=0;i<n;i++){
-            map<char,int>mp;
-            for(int j=i;j<n;j++){
-                mp[s[j]]++;
-                if(mp[s[j]]>2){
-                    break;
-                }
-                ans=max(ans,j-i+1);
+        while(i<n){
+            mp[s[i]]++;
+            while(mp[s[i]]==3){
+                mp[s[j]]--;
+                j++;
             }
+            ans=max(ans,i-j+1);
+            i++;
         }
+
         return ans;
     }
 };
