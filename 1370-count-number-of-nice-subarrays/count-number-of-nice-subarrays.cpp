@@ -13,7 +13,6 @@ public:
        for(int i:nums){
             sum+=i;
             count+=mp[sum-k];
-            // cout<<sum-k<<" "<<mp[sum-k]<<endl;
             mp[sum]++;
        }
         return count;
